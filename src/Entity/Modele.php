@@ -24,12 +24,12 @@ class Modele
     /**
      * @var string|null
      *
-     * @ORM\Column(name="LIBELLE", type="string", length=32, nullable=true, options={"default"="NULL","fixed"=true})
+     * @ORM\Column(name="LIBELLE", type="string", length=32, nullable=true, options={"fixed"=true})
      */
-    private $libelle = 'NULL';
+    private $libelle;
 
     /**
-     * @var \Tarification
+     * @var Tarification
      *
      * @ORM\ManyToOne(targetEntity="Tarification")
      * @ORM\JoinColumns({
@@ -55,7 +55,7 @@ class Modele
         return $this;
     }
 
-    public function getIdRel2(): ?Tarification
+    public function getIdRel2(): Tarification
     {
         return $this->idRel2;
     }

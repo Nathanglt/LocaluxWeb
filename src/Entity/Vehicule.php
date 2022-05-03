@@ -15,9 +15,9 @@ class Vehicule
     /**
      * @var string|null
      *
-     * @ORM\Column(name="IMMATRICULATION", type="string", length=32, nullable=true, options={"default"="NULL","fixed"=true})
+     * @ORM\Column(name="IMMATRICULATION", type="string", length=32, nullable=true, options={"fixed"=true})
      */
-    private $immatriculation = 'NULL';
+    private $immatriculation;
 
     /**
      * @var int

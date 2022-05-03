@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\Vehicule;
 
 /**
  * Location
@@ -11,7 +10,7 @@ use App\Entity\Vehicule;
  * @ORM\Table(name="LOCATION", indexes={@ORM\Index(name="I_FK_LOCATION_VEHICULE", columns={"ID"}), @ORM\Index(name="I_FK_LOCATION_CLIENT", columns={"ID_1"})})
  * @ORM\Entity
  */
-class Location
+abstract class Location
 {
     /**
      * @var int
@@ -20,69 +19,69 @@ class Location
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $numlocation;
+    protected $numlocation;
 
     /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="DATELOCATION", type="date", nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="DATELOCATION", type="date", nullable=true)
      */
-    private $datelocation = 'NULL';
+    protected $datelocation;
 
     /**
      * @var float|null
      *
-     * @ORM\Column(name="MONTANTREGLE", type="float", precision=255, scale=2, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="MONTANTREGLE", type="float", precision=255, scale=2, nullable=true)
      */
-    private $montantregle = NULL;
+    protected $montantregle;
 
     /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="DATEHREDEPARTPREVU", type="date", nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="DATEHREDEPARTPREVU", type="date", nullable=true)
      */
-    private $datehredepartprevu = 'NULL';
+    protected $datehredepartprevu;
 
     /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="DATEHRERETOURPREVU", type="date", nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="DATEHRERETOURPREVU", type="date", nullable=true)
      */
-    private $datehreretourprevu = 'NULL';
+    protected $datehreretourprevu;
 
     /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="DATEHREDEPARTREEL", type="date", nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="DATEHREDEPARTREEL", type="date", nullable=true)
      */
-    private $datehredepartreel = 'NULL';
+    protected $datehredepartreel;
 
     /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="DATEHRERETOURREEL", type="date", nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="DATEHRERETOURREEL", type="date", nullable=true)
      */
-    private $datehreretourreel = 'NULL';
+    protected $datehreretourreel;
 
     /**
-     * @var \Vehicule
+     * @var Vehicule
      *
      * @ORM\ManyToOne(targetEntity="Vehicule")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="ID", referencedColumnName="ID")
      * })
      */
-    private $id;
+    protected $id;
 
     /**
-     * @var \Client
+     * @var Client
      *
      * @ORM\ManyToOne(targetEntity="Client")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="ID_1", referencedColumnName="ID")
      * })
      */
-    private $id1;
+    protected $id1;
 
     public function getNumlocation(): ?int
     {
@@ -161,7 +160,7 @@ class Location
         return $this;
     }
 
-    public function getId(): ?Vehicule
+    public function getId(): Vehicule
     {
         return $this->id;
     }
@@ -173,7 +172,7 @@ class Location
         return $this;
     }
 
-    public function getId1(): ?Client
+    public function getId1(): Client
     {
         return $this->id1;
     }
