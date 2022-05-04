@@ -3,12 +3,17 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\MappedSuperclass;
 
 /**
  * Formule
  *
  * @ORM\Table(name="FORMULE", indexes={@ORM\Index(name="I_FK_FORMULE_TARIFICATION", columns={"ID_REL_1"})})
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="discr", type="string")
+ * @ORM\DiscriminatorMap({"formule" = "Formule", "formuleavecchauffeur" = "Formuleavecchauffeur", "formulesanschauffeur" = "Formulesanschauffeur"})
  * @ORM\Entity
+ * @MappedSuperclass
  */
 abstract class Formule
 {

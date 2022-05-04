@@ -8,6 +8,11 @@ use Doctrine\ORM\Mapping as ORM;
  * Location
  *
  * @ORM\Table(name="LOCATION", indexes={@ORM\Index(name="I_FK_LOCATION_VEHICULE", columns={"ID"}), @ORM\Index(name="I_FK_LOCATION_CLIENT", columns={"ID_1"})})
+ * 
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="discr", type="string")
+ * @ORM\DiscriminatorMap({"location" = "Location", "locationavecchauffeur" = "Locationavecchauffeur", "locationsanschauffeur" = "Locationsanschauffeur"})
+ * 
  * @ORM\Entity
  */
 abstract class Location
