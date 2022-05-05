@@ -8,6 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
  * User
  *
  * @ORM\Table(name="USER")
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="discr", type="string")
+ * @ORM\DiscriminatorMap({"user" = "User", "client" = "Client", "salarie" = "Salarie"})
  * @ORM\Entity
  */
 class User
@@ -19,35 +22,35 @@ class User
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="NOM", type="string", length=32, nullable=true, options={"default"="NULL","fixed"=true})
+     * @ORM\Column(name="NOM", type="string", length=32, nullable=true, options={"fixed"=true})
      */
-    private $nom = 'NULL';
+    protected $nom;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="PRENOM", type="string", length=32, nullable=true, options={"default"="NULL","fixed"=true})
+     * @ORM\Column(name="PRENOM", type="string", length=32, nullable=true, options={"fixed"=true})
      */
-    private $prenom = 'NULL';
+    protected $prenom;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="LOGIN", type="string", length=32, nullable=true, options={"default"="NULL","fixed"=true})
+     * @ORM\Column(name="LOGIN", type="string", length=32, nullable=true, options={"fixed"=true})
      */
-    private $login = 'NULL';
+    protected $login;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="MOTDEPASSE", type="string", length=255, nullable=true, options={"default"="NULL","fixed"=true})
+     * @ORM\Column(name="MOTDEPASSE", type="string", length=255, nullable=true, options={"fixed"=true})
      */
-    private $motdepasse = 'NULL';
+    protected $motdepasse;
 
     public function getId(): ?string
     {

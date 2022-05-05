@@ -3,14 +3,19 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\MappedSuperclass;
 
 /**
  * Formule
  *
  * @ORM\Table(name="FORMULE", indexes={@ORM\Index(name="I_FK_FORMULE_TARIFICATION", columns={"ID_REL_1"})})
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="discr", type="string")
+ * @ORM\DiscriminatorMap({"formule" = "Formule", "formuleavecchauffeur" = "Formuleavecchauffeur", "formulesanschauffeur" = "Formulesanschauffeur"})
  * @ORM\Entity
+ * @MappedSuperclass
  */
-class Formule
+abstract class Formule
 {
     /**
      * @var string
@@ -19,24 +24,24 @@ class Formule
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="LIBELLE", type="string", length=32, nullable=true, options={"default"="NULL","fixed"=true})
+     * @ORM\Column(name="LIBELLE", type="string", length=32, nullable=true, options={"fixed"=true})
      */
-    private $libelle = 'NULL';
+    protected $libelle;
 
     /**
-     * @var \Tarification
+     * @var Tarification
      *
      * @ORM\ManyToOne(targetEntity="Tarification")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="ID_REL_1", referencedColumnName="ID")
      * })
      */
-    private $idRel1;
+    protected $idRel1;
 
     public function getId(): ?string
     {
@@ -55,7 +60,7 @@ class Formule
         return $this;
     }
 
-    public function getIdRel1(): ?Tarification
+    public function getIdRel1(): Tarification
     {
         return $this->idRel1;
     }

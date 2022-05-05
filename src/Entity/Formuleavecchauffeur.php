@@ -10,40 +10,21 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="FORMULEAVECCHAUFFEUR")
  * @ORM\Entity
  */
-class Formuleavecchauffeur
+class Formuleavecchauffeur extends Formule
 {
     /**
      * @var string|null
      *
-     * @ORM\Column(name="LIEU", type="string", length=32, nullable=true, options={"default"="NULL","fixed"=true})
+     * @ORM\Column(name="LIEU", type="string", length=32, nullable=true, options={"fixed"=true})
      */
-    private $lieu = 'NULL';
+    private $lieu;
 
     /**
      * @var float|null
      *
-     * @ORM\Column(name="TARIF", type="float", precision=255, scale=2, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="TARIF", type="float", precision=255, scale=2, nullable=true)
      */
-    private $tarif = NULL;
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="LIBELLE", type="string", length=32, nullable=true, options={"default"="NULL","fixed"=true})
-     */
-    private $libelle = 'NULL';
-
-    /**
-     * @var \Formule
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Formule")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="ID", referencedColumnName="ID")
-     * })
-     */
-    private $id;
+    private $tarif;
 
     public function getLieu(): ?string
     {
@@ -65,30 +46,6 @@ class Formuleavecchauffeur
     public function setTarif(?float $tarif): self
     {
         $this->tarif = $tarif;
-
-        return $this;
-    }
-
-    public function getLibelle(): ?string
-    {
-        return $this->libelle;
-    }
-
-    public function setLibelle(?string $libelle): self
-    {
-        $this->libelle = $libelle;
-
-        return $this;
-    }
-
-    public function getId(): ?Formule
-    {
-        return $this->id;
-    }
-
-    public function setId(?Formule $id): self
-    {
-        $this->id = $id;
 
         return $this;
     }
